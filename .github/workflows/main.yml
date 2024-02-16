@@ -54,4 +54,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: release-${{ github.run_number }}
-        path: output/ # Replace 'output/' with the path to your folder containing files to upload
+        path: output

@@ -39,8 +39,8 @@ async function start() {
 
     console.log("Saving to file")
     const jsonData = JSON.stringify(giftsDictionary, null, 2);
-    fs.writeFileSync('./out/gifts.json', jsonData)
-    fs.writeFileSync(`./out/gifts-${getCurrentDate()}.json`, jsonData)
+    fs.writeFileSync('./output/gifts.json', jsonData)
+    fs.writeFileSync(`./output/gifts-${getCurrentDate()}.json`, jsonData)
 }
 
 

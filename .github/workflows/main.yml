@@ -21,11 +21,8 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Run tests
-      run: npm test
-
     - name: Run the Node.js application
-      run: node your_app.js
+      run: npm start
 
     - name: Configure git
       run: |

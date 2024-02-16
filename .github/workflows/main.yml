@@ -31,7 +31,7 @@ jobs:
           automatic_release_tag: v${{ github.run_number }}
           prerelease: false
           draft: false
-          title: Gifts Output
+          title: Gifts Output $(date '+%Y-%m-%d')
           files: |
               output/*.json
 

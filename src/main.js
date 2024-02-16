@@ -38,6 +38,11 @@ async function start() {
     }
 
     console.log("Saving to file")
+
+    if (!fs.existsSync('./output')) {
+        fs.mkdirSync('./output', {recursive: true});
+    }
+
     const jsonData = JSON.stringify(giftsDictionary, null, 2);
     fs.writeFileSync('./output/gifts.json', jsonData)
     fs.writeFileSync(`./output/gifts-${getCurrentDate()}.json`, jsonData)

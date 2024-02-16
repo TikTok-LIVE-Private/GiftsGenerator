@@ -134,3 +134,5 @@ dist
 *.xml
 *.iml
 package-lock.json
+
+output

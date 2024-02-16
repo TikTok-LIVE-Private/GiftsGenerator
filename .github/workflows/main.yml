@@ -24,19 +24,14 @@ jobs:
     - name: Run the Node.js application
       run: npm start
 
-    - name: Create release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name:  create Release
+      uses: "marvinpinto/action-automatic-releases@latest"
       with:
-        tag_name: v${{ github.run_number }}
-        release_name: gifts-output
-        draft: false
-        prerelease: false
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: v${{ github.run_number }}
+          prerelease: false
+          draft: false
+          title: Gifts Output
+          files: |
+              output/*.json
 
-    - name: Upload files
-      uses: actions/upload-artifact@v2
-      with:
-        name: release-${{ github.run_number }}
-        path: output

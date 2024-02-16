@@ -16,13 +16,16 @@ jobs:
     - name: Use Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '14' # You can change this to your preferred Node.js version
+        node-version: '14'
 
     - name: Install dependencies
       run: npm install
 
+    - name: Run tests
+      run: npm test
+
     - name: Run the Node.js application
-      run: npm start
+      run: node your_app.js
 
     - name: Configure git
       run: |
@@ -38,3 +41,20 @@ jobs:
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Create release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: v${{ github.run_number }}
+        release_name: Release ${{ github.run_number }}
+        draft: false
+        prerelease: false
+
+    - name: Upload files
+      uses: actions/upload-artifact@v2
+      with:
+        name: release-${{ github.run_number }}
+        path: output/ # Replace 'output/' with the path to your folder containing files to upload

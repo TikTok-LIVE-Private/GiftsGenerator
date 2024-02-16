@@ -24,21 +24,6 @@ jobs:
     - name: Run the Node.js application
       run: npm start
 
-    - name: Configure git
-      run: |
-        git config user.email "actions@github.com"
-        git config user.name "GitHub Actions"
-
-    - name: Commit changes
-      run: |
-        git add .
-        git commit -m "Update data [skip ci]" || exit 0
-
-    - name: Push changes
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-
     - name: Create release
       id: create_release
       uses: actions/create-release@v1

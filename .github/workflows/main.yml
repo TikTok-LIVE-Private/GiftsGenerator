@@ -24,6 +24,11 @@ jobs:
     - name: Run the Node.js application
       run: npm start
 
+    - name: Copy output file
+      run: cp ./output/output.json .
+    - name: Display files
+      run: ls -li
+
     - name:  create Release
       uses: "marvinpinto/action-automatic-releases@latest"
       with:

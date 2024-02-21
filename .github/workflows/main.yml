@@ -29,6 +29,17 @@ jobs:
     - name: Display files
       run: ls -li
 
+    - name: 9 Commit gift.json
+      run: |
+            git config --local user.email "action@github.com"
+            git config --local user.name ":D:D:D:D:D"
+            git add gifts.json
+            git commit -m "Update gifts "
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+       branch: master     
+
     - name:  create Release
       uses: "marvinpinto/action-automatic-releases@latest"
       with:

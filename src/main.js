@@ -36,13 +36,13 @@ async function start() {
     console.log(" - total loaded gifts ", Object.keys(giftsDictionary).length)
     console.log("Saving to file")
 
-    if (!fs.existsSync('./output')) {
-        fs.mkdirSync('./output', {recursive: true});
+    if (!fs.existsSync('./page/public')) {
+        fs.mkdirSync('./page/public', {recursive: true});
     }
 
     const jsonData = JSON.stringify(giftsDictionary, null, 2);
-    fs.writeFileSync('./output/gifts.json', jsonData)
-    fs.writeFileSync(`./output/gifts-${getCurrentDate()}.json`, jsonData)
+    fs.writeFileSync('./page/public/gifts.json', jsonData)
+    fs.writeFileSync(`./page/public/gifts-${getCurrentDate()}.json`, jsonData)
 }
 
 

@@ -1,7 +1,7 @@
 const loadScrappedGifts = require("./gifts-scrapper-loader");
 const loadExtraGifts = require("./gifts-extra-loader");
 const fs = require("fs");
-const loadTikTokGifts = require("./gifts-tiktok-loader");
+const loadTikTokGifts = require("./gifts-tiktok-api");
 
 
 function getCurrentDate() {
@@ -27,16 +27,13 @@ async function start() {
 
     let gifts = scrappedGifts.concat(extraGifts)
     gifts = gifts.concat(tiktokGifts)
-    console.log(" - total loaded gifts ", gifts.length)
+
     const giftsDictionary = {};
     for (let gift of gifts) {
-        if (!('combo' in gift)) {
-            gift["combo"] = "unknown"
-        }
-
+        gift["properties"] = {}
         giftsDictionary[gift.id] = gift
     }
-
+    console.log(" - total loaded gifts ", Object.keys(giftsDictionary).length)
     console.log("Saving to file")
 
     if (!fs.existsSync('./output')) {
@@ -49,9 +46,6 @@ async function start() {
 }
 
 
-try {
-    start();
-} catch (e) {
-    console.log("Uknown error while generating gifts")
-    console.log(e)
-}
+start()
+
+

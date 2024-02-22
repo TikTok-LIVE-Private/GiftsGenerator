@@ -24,34 +24,30 @@ jobs:
     - name: Run the Node.js application
       run: npm start
 
-    - name: Configure git
-      run: |
-        git config user.email "actions@github.com"
-        git config user.name "GitHub Actions"
+    - name: Copy output file
+      run: cp ./output/gifts.json .
+    - name: Display files
+      run: ls -li
 
-    - name: Commit changes
+    - name: 9 Commit gift.json
       run: |
-        git add .
-        git commit -m "Update data [skip ci]" || exit 0
-
+            git config --local user.email "action@github.com"
+            git config --local user.name ":D:D:D:D:D"
+            git add gifts.json
+            git commit -m "Update gifts "
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+       branch: master     
 
-    - name: Create release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name:  create Release
+      uses: "marvinpinto/action-automatic-releases@latest"
       with:
-        tag_name: gifts-output
-        release_name: gifts-output
-        draft: false
-        prerelease: false
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: v${{ github.run_number }}
+          prerelease: false
+          draft: false
+          title: Gifts Output
+          files: |
+              output/*.json
 
-    - name: Upload files
-      uses: actions/upload-artifact@v2
-      with:
-        name: release-${{ github.run_number }}
-        path: output/ # Replace 'output/' with the path to your folder containing files to upload

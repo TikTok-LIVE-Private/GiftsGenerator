@@ -24,16 +24,11 @@ jobs:
     - name: Run the Node.js application
       run: npm start
 
-    - name: Copy output file
-      run: cp ./output/gifts.json .
-    - name: Display files
-      run: ls -li
-
     - name: 9 Commit gift.json
       run: |
             git config --local user.email "action@github.com"
             git config --local user.name ":D:D:D:D:D"
-            git add gifts.json
+            git add '*.json'
             git commit -m "Update gifts "
     - name: Push changes
       uses: ad-m/github-push-action@master
